@@ -1,21 +1,7 @@
 <script lang="ts">
     import Display from "./Display.svelte";
     import Button from './Button.svelte';
-
-    class Operation {
-        public static ADD = new Operation('+', '+');
-        public static SUBTRACT = new Operation('-', '-');
-        public static MULTIPLY = new Operation('×', '*');
-        public static DIVIDE = new Operation('÷', '/');
-
-        readonly label: string;
-        readonly expr: string;
-
-        private constructor(label: string, expr: string) {
-            this.label = label;
-            this.expr = expr;
-        }
-    }
+    import { Operation } from "./Operation";
 
     let value = "0";
     let valueComplete = true;
