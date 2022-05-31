@@ -4,7 +4,7 @@
 </script>
 <div style={$$props.style}>
     <label for="calculator-display">{expression === undefined ? "" : expression}</label>
-    <input id="calculator-display" type="text" bind:value readonly>
+    <input id="calculator-display" type="text" bind:value on:submit|preventDefault readonly>
 </div>
 <style>
     div {

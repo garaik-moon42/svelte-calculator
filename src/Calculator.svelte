@@ -2,11 +2,18 @@
     import Display from "./Display.svelte";
     import Button from './Button.svelte';
     import { Operation } from "./Operation";
+    import { create as mathJsCreate, all as mathJsAll} from "mathjs";
 
     let value = "0";
     let valueComplete = true;
     let expression: (string|Operation)[] = [];
     let displayedExpression: string = "";
+
+    const mathjs = mathJsCreate(mathJsAll);
+    mathjs.config({
+        number: "BigNumber",
+        precision: 64
+    });
 
     function composeDisplayedExpression():string {
         return expression.map(item => item instanceof Operation ? item.label : item).join(' ');
@@ -40,7 +47,7 @@
             expression = [...expression, value];
             displayedExpression = composeDisplayedExpression() + " =";
             let exprToEval = expression.map(item => item instanceof Operation ? item.expr : item).join(' ');
-            value = eval(exprToEval);
+            value = mathjs.evaluate(exprToEval);
             valueComplete = true;
             expression = [];
         }
