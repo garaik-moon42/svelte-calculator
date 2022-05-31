@@ -39,7 +39,7 @@
     function clickPoint() {
         if (value.indexOf(".") === -1) {
             value += ".";
-            valueComplete = false;.
+            valueComplete = false;
         }
     }
 
