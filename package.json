@@ -31,5 +31,13 @@
   "main": "rollup.config.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/garaik-moon42/svelte-calculator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/garaik-moon42/svelte-calculator/issues"
+  },
+  "homepage": "https://github.com/garaik-moon42/svelte-calculator#readme"
 }

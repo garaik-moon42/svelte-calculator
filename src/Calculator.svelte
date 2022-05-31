@@ -18,51 +18,37 @@
     }
 
     let value = "0";
-    let postOperatorMode = false;
     let expression: (string|Operation)[] = [];
-    $: displayedExpression = expression.map(item => {
-            if (item instanceof Operation) {
-                return item.expr;
-            }
-            else {
-                return item;
-            }
-        }).join(' ');
+    let displayedExpression: string = "";
+
+    function composeDisplayedExpression():string {
+        return expression.map(item => item instanceof Operation ? item.label : item).join(' ');
+    }  
+
+    function isTheLastItemAnOperation():boolean {
+        return expression[expression.length - 1] instanceof Operation;
+    }
 
     function clickDigit(digit: number):void {
-        if (value === "0" || postOperatorMode) {
-            value = "" + digit;
-            postOperatorMode = false;
-        }
-        else {
-            value += "" + digit;
-        }
+        value = "" + Number.parseInt(value += digit);
     }
 
     function clickOperation(op: Operation) {
-        if (postOperatorMode) {
+        if (isTheLastItemAnOperation()) {
             expression = [...expression.slice(0, -1), op];
         }
         else {
-            if (value !== "0") {
-                expression = [...expression, value, op];
-                postOperatorMode = true;
-            }
+            expression = [...expression, value, op];
         }
+        displayedExpression = composeDisplayedExpression();
     }
 
     function clickResult() {
         if (expression.length > 0) {
-            if (postOperatorMode) {
-                expression = expression.slice(0, -1);
-            }
-            else {
-                expression = [...expression, value];
-            }
-            let toEval = expression.join(' ');
-            value = eval(toEval);
-            expression = [];
-            postOperatorMode = true;
+            expression = [...expression, value];
+            let exprToEval = expression.map(item => item instanceof Operation ? item.expr : item).join(' ');
+            displayedExpression += " =";
+            value = eval(exprToEval);
         }
     }
 
