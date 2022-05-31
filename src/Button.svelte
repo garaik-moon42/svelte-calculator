@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     export let label = 'This is a button';
 </script>
 <button style={$$props.style} on:click>{label}</button>

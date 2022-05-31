@@ -1,7 +1,5 @@
 <script lang="ts">
 	import Calculator from "./Calculator.svelte";
-	let greeting = 'Hellobello';
-	export let name: string;
 </script>
 <Calculator class="calculator" />
 <style>
